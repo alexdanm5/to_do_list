@@ -1,0 +1,110 @@
+
+.toDo {
+    &__wrapper {
+        margin-top: 100px;
+        width: 100%;
+    }
+    &__header {
+        width: 100%;
+        background-color:rgba(209, 249, 236, 0.348);
+        border-radius: 10px;
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    &__input {
+        width: 100%;
+        min-height: 30px;
+        border: none;
+        border-radius:5px;
+        padding: 5px 0 5px 5px;
+        resize: none;
+        field-sizing: content;
+    }
+    &__btn {
+        width: 150px;
+        height: 45px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(144, 238, 144, 0.45);
+        box-shadow: 2px 4px 10px rgba(154, 152, 152, 0.531);
+        cursor: pointer;
+        &:hover {
+            box-shadow: 2px 6px 15px rgba(154, 152, 152, 0.531);
+        }
+        &:active {
+            box-shadow: none;
+        }
+    }
+    &__content {
+        padding-top: 10px;
+        margin-top: 30px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: lemonchiffon;
+    }
+    &__title {
+        margin: 0;
+        font-size: 32px;
+        text-align: center;
+    }
+    &__list {
+        margin: 0;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
+        overflow: hidden;
+
+    }
+    &__item {
+        transform: translateX(calc(-100% - 10px));
+        list-style-type: none;
+        padding: 10px 0 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: rgb(251, 188, 188);
+        border-radius: 5px;
+        transform: translateX(0);
+        transition: all 0.5s ease-in-out;
+    }
+    &__checkbox {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    &__text {
+        width: 70%;
+    }
+    &__btns {
+        display: flex;
+        gap: 30px;
+    }
+    &__edit, &__delete {
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+        svg{
+            width: 20px;
+            height: 20px;
+            &:hover{
+                fill: red;
+                scale: 1.2;
+            }
+        }
+    }
+
+    &__deleted {
+        transform: translateX(calc(100% + 10px));
+        transition: all 0.5s ease-in-out;
+    }
+
+    &__checked {
+        background-color: rgba(159, 242, 159, 0.903);
+    }
+}
+
