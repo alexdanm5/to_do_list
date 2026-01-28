@@ -1,4 +1,4 @@
-import {ToDo} from '../toDo/ToDo';
+import {ToDo} from '../components/containers/toDo/ToDo';
 
 import './App.scss';
 

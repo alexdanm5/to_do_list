@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import Delete from './delete/Delete';
-import {Modal} from '../modal/Modal';
+import Modal from '../../elements/modal/Modal';
 import './toDo.scss';
 
 const ToDoItem = ({el, onChange, animateDeletingPoint}) => {
@@ -19,9 +19,12 @@ const ToDoItem = ({el, onChange, animateDeletingPoint}) => {
                 />
                 <div className="toDo__text">{el.text}</div>
                 <div className='toDo__btns'>
-                    <button onClick={() => {
-                        animateDeletingPoint(el.key);
-                    }} className="toDo__delete"><Delete /></button>
+                    <button 
+                        onClick={() => animateDeletingPoint(el.key)}
+                        className="toDo__delete"
+                    >
+                        <Delete />
+                    </button>
                 </div>
         </li>
     )

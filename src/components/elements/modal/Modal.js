@@ -1,7 +1,7 @@
 
 import './modal.scss';
 
-export const Modal = ({onDecision}) => {
+const Modal = ({onDecision}) => {
 
     return (
         <div className="modal__overlay">
@@ -15,3 +15,5 @@ export const Modal = ({onDecision}) => {
         </div>
     )
 }
+
+export default Modal;
