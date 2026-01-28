@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import Delete from './delete/Delete';
+import {Modal} from '../modal/Modal';
 import './toDo.scss';
 
 const ToDoItem = ({el, onChange, animateDeletingPoint}) => {
@@ -28,6 +30,8 @@ const ToDoItem = ({el, onChange, animateDeletingPoint}) => {
 export const ToDo = () => {
     const [list, setList] = useState([]);
     const [text, setText] = useState('');
+    // Состояние отображения модального окна
+    const [viewModal, setViewModal] = useState(false);
 
     // Анимации удаления задачи
     const animateDeletingPoint = (point) => {
@@ -37,6 +41,39 @@ export const ToDo = () => {
     };
 
     const handleChange = (el) => setList([...list.map(it => it.key !== el.key ? it : { key: el.key, checked: !el.checked, text: el.text})]);
+
+    // Валидация на дублирующиеся задачи c учетом регистра, пробелов и сиймволов
+    const listValidate = () => {
+        const cleanInput = text.replace(/\W/g, '').toLowerCase();
+        if (list.length === 0) return true;
+        const hasDuplicate = list.some(item => {
+            const cleanItem = item.text.replace(/\W/g, '').toLowerCase();
+            return cleanInput === cleanItem;
+        });
+        return !hasDuplicate;
+    }
+
+    // Добавление новой задачи с проверкой на дублирование
+    const addNewPoint = () => {
+        if (listValidate()) {
+            setList(prev => [...prev, { key: prev.length + 1, text, checked: false }]);
+        } else {
+            setViewModal(true);
+        }
+    }
+
+    // Обработка решения пользователя в модальном окне
+    const handleDecision = (result) => {
+        if(viewModal && result !== null){
+            if(result){
+                setList(prev => [...prev, { key: prev.length + 1, text, checked: false }]);
+            }
+            setViewModal(false);
+        }
+    };
+
+    const modalWindow = viewModal ? <Modal onDecision={handleDecision}/> : null;
+
 
     return (
         <div className="toDo__wrapper">
@@ -48,7 +85,7 @@ export const ToDo = () => {
                     onChange={e => setText(e.currentTarget.value)}
                 />
                 <button
-                    onClick={() => setList(prev => [...prev, { key: prev.length + 1, text, checked: false }])}
+                    onClick={() =>  addNewPoint()}
                     className="toDo__btn"
                 >
                     Add
@@ -61,6 +98,8 @@ export const ToDo = () => {
                     {list.map(el => <ToDoItem el={el} onChange={() => handleChange(el)} animateDeletingPoint={animateDeletingPoint}/>)}
                 </ul>
             </div>
+            {/* Использовал портал что бы модальное окно не было ограничено контейнером */}
+            {createPortal(modalWindow, document.body)}
         </div>
     )
 }
