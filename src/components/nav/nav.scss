@@ -1,0 +1,20 @@
+.nav {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    &__link {
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+        &:hover {
+            color: #4caf50;
+        }
+    }
+    &__link.active {
+        font-weight: bold;
+        color: #4caf50;
+    }
+}
